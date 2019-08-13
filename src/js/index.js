@@ -35,3 +35,8 @@ store.dispatch(addMark(Mark('group', {_parent: 1})));
 require('./components');
 
 store.dispatch(require('./actions/historyActions').clearHistory());
+
+if (window.location.search.indexOf('record') > -1) {
+  localStorage.clear();
+  console.log('clear');
+}
