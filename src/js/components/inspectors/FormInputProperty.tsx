@@ -2,12 +2,12 @@
 const ContentEditable = require('../ContentEditable');
 const getInVis = require('../../util/immutable-utils').getInVis;
 const ctrl = require('../../ctrl');
+const listeners = require('../../ctrl/listeners');
 
 import * as React from 'react';
 import {connect} from 'react-redux';
 import { Dispatch } from 'redux';
 import {setSignal} from '../../actions/signalActions';
-import {offSignal, onSignal} from '../../ctrl/listeners';
 import sg from '../../ctrl/signals';
 import {State} from '../../store';
 import {Icon} from '../Icon';
@@ -92,14 +92,14 @@ class BaseFormInputProperty extends React.Component<OwnProps & StateProps & Disp
   public onSignal(signal) {
     signal = signal || this.props.signal;
     if (signal) {
-      onSignal(signal, this.signal.bind(this));
+      listeners.onSignal(signal, this.signal.bind(this));
     }
   };
 
   public offSignal(signal) {
     signal = signal || this.props.signal;
     if (signal) {
-      offSignal(signal, this.signal.bind(this));
+      listeners.offSignal(signal, this.signal.bind(this));
     }
   };
 
