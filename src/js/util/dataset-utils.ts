@@ -39,7 +39,7 @@ function def(id: number) {
 }
 
 // tslint:disable-next-line:variable-name
-let _values = {};
+let _values: {[s: string]: object[]} = {};
 
 function isSourceDatasetRecord(ds: DatasetRecord): ds is SourceDatasetRecord {
   return (ds as SourceDatasetRecord).source !== undefined;
@@ -82,8 +82,8 @@ export function reset() {
  * @param {number} id - The ID of the dataset.
  * @returns {Array|string} An array of objects.
  */
-export function input(id: number) {
-  return _values[id];
+export function input(id: number): object[] {
+  return _values[id] || [];
 }
 
 /**
@@ -94,12 +94,12 @@ export function input(id: number) {
  * @param {number} id - The ID of the dataset.
  * @returns {Object[]} An array of objects.
  */
-export function output(id: number) {
+export function output(id: number): object[] {
   const ctrl = require('../ctrl'),
     ds = def(id),
-    view = ds && ctrl.view && ctrl.view.data(ds.get('name'));
+    view: object[] = ds && ctrl.view && ctrl.view.data(ds.get('name'));
   // proposed change: ensure ds.values() return contents isnt empty
-  return view && view.values().length ? view.values() : input(id);
+  return view && view.length ? [...view] : input(id);
 }
 
 export interface LoadUrlResult {

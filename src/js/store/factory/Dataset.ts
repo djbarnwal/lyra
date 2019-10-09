@@ -23,7 +23,7 @@ export interface ColumnDescription {
 
 export const Column = Record<ColumnDescription>({
   name: null, type: null, mtype: null, source: null
-});
+}, 'ColumnDescription');
 export type ColumnRecord = RecordOf<ColumnDescription>;
 
 export type Schema = Map<string, ColumnRecord>;
@@ -42,7 +42,7 @@ export type LyraUrlDataset = LyraDatasetProperties & UrlData;
 
 export const Dataset = Record<LyraDataset>({
   _id: null, _parent: null, _schema: null, name: null
-});
+}, 'LyraDataset');
 export type DatasetRecord = RecordOf<LyraDataset>;
 
 export type SourceDatasetRecord = RecordOf<LyraSourceDataset>;
